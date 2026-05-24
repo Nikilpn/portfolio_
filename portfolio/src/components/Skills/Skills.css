@@ -1,0 +1,36 @@
+.skills {
+  padding: 120px 10%;
+  background-color: #020617;
+  color: white;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.skill-card {
+  background-color: #1e293b;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  background-color: #38bdf8;
+  color: black;
+}
+@media screen and (max-width: 768px) {
+
+  .skills {
+    padding: 100px 5%;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

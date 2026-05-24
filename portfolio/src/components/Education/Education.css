@@ -1,0 +1,11 @@
+.education {
+  padding: 100px 10%;
+  background-color: #111827;
+  color: white;
+}
+
+.education-card {
+  background-color: #1e293b;
+  padding: 30px;
+  border-radius: 12px;
+}
