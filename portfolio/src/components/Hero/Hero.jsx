@@ -25,7 +25,7 @@ function Hero() {
         <div className="hero-buttons">
 
           <a
-            href="/Nikhilpn.pdf"
+            href="/Nikhil_pn.pdf"
             download
             className="hero-link"
           >
