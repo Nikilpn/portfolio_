@@ -83,6 +83,23 @@
   box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15) !important;
 }
 
+.hero-voice-btn {
+  background: linear-gradient(135deg, #f59e0b, #ef4444) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-voice-btn.active {
+  animation: voicePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes voicePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+}
+
 /* ---------- 3D animated hero video ---------- */
 
 .hero-video-wrap {

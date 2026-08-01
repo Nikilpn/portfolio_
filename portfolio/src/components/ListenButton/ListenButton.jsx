@@ -8,23 +8,47 @@ function ListenButton() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const broadcast = (playing) => {
+    window.dispatchEvent(
+      new CustomEvent("voiceover-state", { detail: { playing } })
+    );
+  };
+
   const toggleAudio = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
+    if (audio.paused) {
       audio.currentTime = 0;
       audio.play();
       setIsPlaying(true);
+      broadcast(true);
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+      broadcast(false);
     }
   };
 
   const handleAudioEnd = () => {
     setIsPlaying(false);
+    broadcast(false);
   };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    const handleExternalToggle = () => toggleAudio();
+
+    window.addEventListener("toggle-voiceover", handleExternalToggle);
+
+    return () => {
+      window.removeEventListener("toggle-voiceover", handleExternalToggle);
+      if (audio) {
+        audio.pause();
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;

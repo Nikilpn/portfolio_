@@ -1,10 +1,29 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { FaVolumeUp, FaPause } from "react-icons/fa";
 
 import "./Hero.css";
 
 function Hero() {
 
   const videoWrapRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const handleState = (e) => {
+      setIsPlaying(e.detail.playing);
+    };
+
+    window.addEventListener("voiceover-state", handleState);
+
+    return () => {
+      window.removeEventListener("voiceover-state", handleState);
+    };
+  }, []);
+
+  const toggleAudio = () => {
+    window.dispatchEvent(new CustomEvent("toggle-voiceover"));
+  };
 
   const handleMouseMove = (e) => {
     const wrap = videoWrapRef.current;
@@ -74,6 +93,14 @@ function Hero() {
             </button>
 
           </a>
+
+          <button
+            className={`hero-voice-btn ${isPlaying ? "active" : ""}`}
+            onClick={toggleAudio}
+          >
+            {isPlaying ? <FaPause /> : <FaVolumeUp />}
+            {isPlaying ? "Pause Voice" : "Listen to Me"}
+          </button>
 
         </div>
 
