@@ -1,25 +1,45 @@
 import "./Skills.css";
 
-function Skills() {
+import {
+  FaPython,
+  FaReact,
+  FaJs,
+  FaRobot,
+  FaBug,
+  FaGitAlt,
+  FaNetworkWired,
+  FaCogs,
+  FaBrain
+} from "react-icons/fa";
 
-  const skills = [
-    "Python",
-    "Django",
-    "Django REST Framework",
-    "FastAPI",
-    "React.js",
-    "JavaScript",
-    "Machine Learning",
-    "Web Scraping",
-    "Selenium",
-    "Playwright",
-    "Automation",
-    "PostgreSQL",
-    "MySQL",
-    "Git",
-    "REST APIs",
-    "WebSocket"
-  ];
+import {
+  SiDjango,
+  SiFastapi,
+  SiPostgresql,
+  SiMysql,
+  SiSelenium
+} from "react-icons/si";
+
+const skillsData = [
+  { name: "Python", icon: FaPython, color: "#4B8BBE" },
+  { name: "Django", icon: SiDjango, color: "#44B78B" },
+  { name: "Django REST Framework", icon: SiDjango, color: "#A30000" },
+  { name: "FastAPI", icon: SiFastapi, color: "#05998B" },
+  { name: "React.js", icon: FaReact, color: "#61DAFB" },
+  { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
+  { name: "Machine Learning", icon: FaBrain, color: "#F472B6" },
+  { name: "Web Scraping", icon: FaBug, color: "#22D3EE" },
+  { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
+  { name: "Playwright", icon: FaBug, color: "#2EAD33" },
+  { name: "Automation", icon: FaRobot, color: "#A78BFA" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+  { name: "MySQL", icon: SiMysql, color: "#00758F" },
+  { name: "Git", icon: FaGitAlt, color: "#F05032" },
+  { name: "REST APIs", icon: FaNetworkWired, color: "#38BDF8" },
+  { name: "WebSocket", icon: FaCogs, color: "#34D399" }
+];
+
+function Skills() {
 
   return (
     <section id="skills" className="skills">
@@ -30,11 +50,30 @@ function Skills() {
 
       <div className="skills-grid">
 
-        {skills.map((skill, index) => (
-          <div className="skill-card" key={index}>
-            {skill}
-          </div>
-        ))}
+        {skillsData.map((skill, index) => {
+
+          const Icon = skill.icon;
+
+          return (
+            <div
+              className="skill-card"
+              key={index}
+              style={{
+                "--skill-color": skill.color
+              }}
+            >
+              <div className="skill-icon-wrap">
+                <div className="skill-orbit orbit-1" />
+                <div className="skill-orbit orbit-2" />
+                <div className="skill-icon">
+                  <Icon />
+                </div>
+              </div>
+
+              <h3>{skill.name}</h3>
+            </div>
+          );
+        })}
 
       </div>
 

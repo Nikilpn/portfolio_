@@ -8,26 +8,164 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
+  perspective: 1000px;
 }
 
 .skill-card {
   background-color: #1e293b;
-  padding: 30px;
+  padding: 30px 20px;
   text-align: center;
-  border-radius: 12px;
-  transition: 0.3s;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
 
 .skill-card:hover {
-  transform: translateY(-5px);
-  background-color: #38bdf8;
-  color: black;
+  transform: translateY(-8px) rotateX(6deg) rotateY(-6deg) scale(1.03);
+  border-color: var(--skill-color, #38bdf8);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px var(--skill-color, #38bdf8);
+  background: rgba(30, 41, 59, 0.85);
 }
+
+/* Icon wrapper with 3D depth */
+
+.skill-icon-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1.2);
+}
+
+.skill-card:hover .skill-icon-wrap {
+  transform: translateZ(40px) rotateX(12deg) rotateY(12deg) scale(1.1);
+}
+
+.skill-icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--skill-color, #38bdf8);
+  color: var(--skill-color, #38bdf8);
+  font-size: 32px;
+  box-shadow:
+    0 0 18px var(--skill-color, #38bdf8),
+    inset 0 0 12px var(--skill-color, #38bdf8);
+  transition: background 0.3s, color 0.3s;
+}
+
+.skill-card:hover .skill-icon {
+  background: var(--skill-color, #38bdf8);
+  color: #0f172a;
+  animation: iconBounce 0.6s ease;
+}
+
+@keyframes iconBounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.2); }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Orbiting rings */
+
+.skill-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px dashed var(--skill-color, #38bdf8);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.skill-card:hover .skill-orbit {
+  opacity: 1;
+}
+
+.orbit-1 {
+  width: 84px;
+  height: 84px;
+  animation: orbitSpin 6s linear infinite;
+}
+
+.orbit-2 {
+  width: 70px;
+  height: 70px;
+  animation: orbitSpin 4s linear infinite reverse;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Skill name */
+
+.skill-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #e2e8f0;
+  transition: color 0.3s;
+  transform: translateZ(25px);
+}
+
+.skill-card:hover h3 {
+  color: var(--skill-color, #38bdf8);
+}
+
 @media screen and (max-width: 768px) {
 
   .skills {
     padding: 100px 5%;
   }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .skill-card {
+    padding: 22px 14px;
+  }
+
+  .skill-icon-wrap {
+    width: 74px;
+    height: 74px;
+  }
+
+  .skill-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+
+  .orbit-1 {
+    width: 68px;
+    height: 68px;
+  }
+
+  .orbit-2 {
+    width: 56px;
+    height: 56px;
+  }
+
+}
+
+@media screen and (max-width: 420px) {
 
   .skills-grid {
     grid-template-columns: 1fr;
