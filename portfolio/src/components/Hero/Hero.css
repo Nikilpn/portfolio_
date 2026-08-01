@@ -83,6 +83,22 @@
   box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15) !important;
 }
 
+.hero-voice-btn {
+  background: linear-gradient(135deg, #f59e0b, #ef4444) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-voice-btn.active {
+  animation: voicePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes voicePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+}
+
 /* ---------- 3D animated hero video ---------- */
 
 .hero-video-wrap {
@@ -126,12 +142,74 @@
     0 0 30px rgba(56, 189, 248, 0.15);
   transform: translateZ(30px);
   background: #020617;
+  animation: hudFloat 5s ease-in-out infinite;
+}
+
+@keyframes hudFloat {
+  0%, 100% { transform: translateZ(30px) translateY(0); }
+  50%      { transform: translateZ(30px) translateY(-12px); }
 }
 
 .video-hud video {
   width: 100%;
   display: block;
   border-radius: 20px;
+}
+
+/* Aurora overlay */
+
+.video-aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.18), transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(99, 102, 241, 0.18), transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(34, 211, 238, 0.1), transparent 60%);
+  mix-blend-mode: screen;
+  animation: auroraShift 8s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+  0%   { opacity: 0.5; transform: scale(1); }
+  50%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+/* Floating particles */
+
+.video-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.vp {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+  animation: particleRise 6s linear infinite;
+  opacity: 0;
+}
+
+.vp-1 { left: 12%;  bottom: 10%; animation-delay: 0s; }
+.vp-2 { left: 28%;  bottom: 5%;  animation-delay: 1s; }
+.vp-3 { left: 45%;  bottom: 15%; animation-delay: 2s; }
+.vp-4 { left: 62%;  bottom: 8%;  animation-delay: 0.5s; }
+.vp-5 { left: 78%;  bottom: 12%; animation-delay: 1.5s; }
+.vp-6 { left: 88%;  bottom: 6%;  animation-delay: 2.5s; }
+.vp-7 { left: 55%;  bottom: 3%;  animation-delay: 3s; }
+.vp-8 { left: 35%;  bottom: 18%; animation-delay: 3.5s; }
+
+@keyframes particleRise {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(-420px) scale(0.4); opacity: 0; }
 }
 
 .video-frame-lines {

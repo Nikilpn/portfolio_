@@ -1,10 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+import { FaVolumeUp, FaPause } from "react-icons/fa";
 
 import "./Hero.css";
 
 function Hero() {
 
   const videoWrapRef = useRef(null);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMouseMove = (e) => {
     const wrap = videoWrapRef.current;
@@ -17,17 +21,35 @@ function Hero() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateY = ((x - centerX) / centerX) * 10;
-    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 12;
+    const rotateX = ((y - centerY) / centerY) * -12;
 
-    wrap.style.transform = `perspective(1100px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    wrap.style.transform = `perspective(1100px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
   };
 
   const handleMouseLeave = () => {
     const wrap = videoWrapRef.current;
     if (!wrap) return;
 
-    wrap.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg)";
+    wrap.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg) scale(1)";
+  };
+
+  const toggleAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.currentTime = 0;
+      audio.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const handleAudioEnd = () => {
+    setIsPlaying(false);
   };
 
   return (
@@ -75,6 +97,23 @@ function Hero() {
 
           </a>
 
+          <button
+            className={`hero-voice-btn ${isPlaying ? "active" : ""}`}
+            onClick={toggleAudio}
+          >
+            {isPlaying ? (
+              <>
+                <FaPause />
+                Pause Voice
+              </>
+            ) : (
+              <>
+                <FaVolumeUp />
+                Listen to Me
+              </>
+            )}
+          </button>
+
         </div>
 
       </div>
@@ -103,7 +142,29 @@ function Hero() {
 
           <div className="video-scanline" />
 
+          <div className="video-aurora" />
+
+          <div className="video-particles">
+
+            <span className="vp vp-1" />
+            <span className="vp vp-2" />
+            <span className="vp vp-3" />
+            <span className="vp vp-4" />
+            <span className="vp vp-5" />
+            <span className="vp vp-6" />
+            <span className="vp vp-7" />
+            <span className="vp vp-8" />
+
+          </div>
+
         </div>
+
+        <audio
+          ref={audioRef}
+          src="/audio/voiceover.mp3"
+          onEnded={handleAudioEnd}
+          preload="auto"
+        />
 
       </div>
 
