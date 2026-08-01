@@ -84,6 +84,9 @@
   transform-style: preserve-3d;
   will-change: transform;
   overflow: hidden;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .project-card:hover {
@@ -253,7 +256,7 @@
 .project-tag,
 .project-card h3,
 .project-card p,
-.project-card a,
+.project-link-label,
 .no-link {
   position: relative;
   z-index: 1;
@@ -311,12 +314,17 @@
   transform: translateZ(15px);
 }
 
-.project-card a {
-  text-decoration: none;
+.project-link-label {
   color: var(--tc1, #38bdf8);
   font-weight: bold;
   transform: translateZ(25px);
   display: inline-block;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.project-card:hover .project-link-label {
+  text-decoration: underline;
 }
 
 .no-link {

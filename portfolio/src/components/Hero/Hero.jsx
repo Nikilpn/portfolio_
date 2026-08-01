@@ -1,14 +1,10 @@
-import { useRef, useState } from "react";
-
-import { FaVolumeUp, FaPause } from "react-icons/fa";
+import { useRef } from "react";
 
 import "./Hero.css";
 
 function Hero() {
 
   const videoWrapRef = useRef(null);
-  const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMouseMove = (e) => {
     const wrap = videoWrapRef.current;
@@ -32,24 +28,6 @@ function Hero() {
     if (!wrap) return;
 
     wrap.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg) scale(1)";
-  };
-
-  const toggleAudio = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio.currentTime = 0;
-      audio.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const handleAudioEnd = () => {
-    setIsPlaying(false);
   };
 
   return (
@@ -97,23 +75,6 @@ function Hero() {
 
           </a>
 
-          <button
-            className={`hero-voice-btn ${isPlaying ? "active" : ""}`}
-            onClick={toggleAudio}
-          >
-            {isPlaying ? (
-              <>
-                <FaPause />
-                Pause Voice
-              </>
-            ) : (
-              <>
-                <FaVolumeUp />
-                Listen to Me
-              </>
-            )}
-          </button>
-
         </div>
 
       </div>
@@ -158,13 +119,6 @@ function Hero() {
           </div>
 
         </div>
-
-        <audio
-          ref={audioRef}
-          src="/audio/voiceover.mp3"
-          onEnded={handleAudioEnd}
-          preload="auto"
-        />
 
       </div>
 

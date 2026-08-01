@@ -6,6 +6,8 @@ import WhatsApp from "./components/WhatsApp/WhatsApp";
 
 import Assistant from "./components/Assistant/Assistant";
 
+import ListenButton from "./components/ListenButton/ListenButton";
+
 function App() {
   return (
     <>
@@ -14,6 +16,8 @@ function App() {
       <WhatsApp />
 
       <Assistant />
+
+      <ListenButton />
     </>
   );
 }

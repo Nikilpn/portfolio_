@@ -92,7 +92,7 @@
   font-weight: 600;
 }
 
-/* ---------- 3D Modal Viewer ---------- */
+/* ---------- Certificate Modal Viewer ---------- */
 
 .cert-modal {
   position: fixed;
@@ -120,7 +120,6 @@
   gap: 22px;
   max-width: 720px;
   width: 100%;
-  perspective: 1200px;
 }
 
 .cert-modal-close {
@@ -157,11 +156,7 @@
   box-shadow:
     0 30px 60px rgba(0, 0, 0, 0.6),
     0 0 40px rgba(56, 189, 248, 0.2);
-  transform-style: preserve-3d;
-  transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
-  transition: transform 0.15s ease-out;
   border: 1px solid rgba(56, 189, 248, 0.3);
-  will-change: transform;
 }
 
 .cert-viewer img {
@@ -170,19 +165,6 @@
   max-height: 70vh;
   object-fit: contain;
   background: #0f172a;
-}
-
-.cert-viewer-shine {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.12) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
 }
 
 .cert-modal-info {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FaTimes, FaExpand } from "react-icons/fa";
 
@@ -76,13 +76,20 @@ function Certifications() {
   ];
 
   const [selected, setSelected] = useState(null);
-  const viewerRef = useRef(null);
+
+  const openViewer = (cert) => {
+    setSelected(cert);
+  };
+
+  const closeViewer = () => {
+    setSelected(null);
+  };
 
   useEffect(() => {
     if (!selected) return;
 
     const handleKey = (e) => {
-      if (e.key === "Escape") setSelected(null);
+      if (e.key === "Escape") closeViewer();
     };
 
     document.addEventListener("keydown", handleKey);
@@ -93,30 +100,6 @@ function Certifications() {
       document.body.style.overflow = "";
     };
   }, [selected]);
-
-  const handleMouseMove = (e) => {
-    const viewer = viewerRef.current;
-    if (!viewer) return;
-
-    const rect = viewer.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateY = ((x - centerX) / centerX) * 14;
-    const rotateX = ((y - centerY) / centerY) * -14;
-
-    viewer.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  };
-
-  const handleMouseLeave = () => {
-    const viewer = viewerRef.current;
-    if (!viewer) return;
-
-    viewer.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
-  };
 
   return (
     <section id="certifications" className="certifications">
@@ -132,12 +115,9 @@ function Certifications() {
           <div
             className="cert-card"
             key={index}
-            onClick={() => setSelected(cert)}
+            onClick={() => openViewer(cert)}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") setSelected(cert);
-            }}
           >
 
             <img
@@ -158,7 +138,7 @@ function Certifications() {
 
             <div className="cert-view-hint">
               <FaExpand />
-              Click to view in 3D
+              Click to view
             </div>
 
           </div>
@@ -171,31 +151,25 @@ function Certifications() {
 
         <div
           className="cert-modal"
-          onClick={() => setSelected(null)}
+          onClick={closeViewer}
         >
 
-          <div
-            className="cert-modal-stage"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="cert-modal-stage">
 
             <button
               className="cert-modal-close"
-              onClick={() => setSelected(null)}
+              onClick={closeViewer}
               aria-label="Close viewer"
             >
               <FaTimes />
             </button>
 
-            <div className="cert-viewer" ref={viewerRef}>
+            <div className="cert-viewer">
 
               <img
                 src={selected.image}
                 alt={selected.title}
               />
-
-              <div className="cert-viewer-shine" />
 
             </div>
 
@@ -204,8 +178,6 @@ function Certifications() {
               <h3>{selected.title}</h3>
 
               <p>{selected.issuer} - {selected.year}</p>
-
-              <span>Move your mouse to tilt the certificate in 3D</span>
 
             </div>
 

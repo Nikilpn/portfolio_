@@ -140,17 +140,21 @@ function ProjectCard({ project }) {
     symbols: ["⚙️", "✨", "💠"]
   };
 
-  return (
-    <div
-      ref={cardRef}
-      className="project-card tilt-card"
-      style={{
-        "--tc1": theme.c1,
-        "--tc2": theme.c2
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
+  const cardStyle = {
+    "--tc1": theme.c1,
+    "--tc2": theme.c2
+  };
+
+  const cardProps = {
+    ref: cardRef,
+    className: "project-card tilt-card",
+    style: cardStyle,
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave
+  };
+
+  const cardContent = (
+    <>
       <div className="card-bg">
         <div className="card-grid" />
 
@@ -186,13 +190,9 @@ function ProjectCard({ project }) {
       <p>{project.description}</p>
 
       {project.github ? (
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noreferrer"
-        >
-          View Project on GitHub
-        </a>
+        <span className="project-link-label">
+          Click anywhere to open on GitHub
+        </span>
       ) : (
         <span className="no-link">
           Company Project - No Public Link
@@ -200,6 +200,22 @@ function ProjectCard({ project }) {
       )}
 
       <div className="card-glare" />
+    </>
+  );
+
+  return project.github ? (
+    <a
+      {...cardProps}
+      href={project.github}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`View ${project.title} on GitHub`}
+    >
+      {cardContent}
+    </a>
+  ) : (
+    <div {...cardProps}>
+      {cardContent}
     </div>
   );
 }
