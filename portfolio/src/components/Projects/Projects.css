@@ -111,6 +111,105 @@
   opacity: 1;
 }
 
+/* ---------- Futuristic sliding card background ---------- */
+
+.card-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 14px;
+}
+
+/* Sliding perspective grid */
+.card-grid {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: -10%;
+  bottom: -10%;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.14) 1px, transparent 1px);
+  background-size: 34px 34px;
+  transform: perspective(400px) rotateX(55deg);
+  transform-origin: center bottom;
+  animation: cardGridSlide 9s linear infinite;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9), transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9), transparent 75%);
+}
+
+@keyframes cardGridSlide {
+  from { background-position: 0 0; }
+  to   { background-position: 0 68px; }
+}
+
+/* Sweeping light beam */
+.card-lightbeam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.09) 45%,
+    rgba(99, 102, 241, 0.14) 50%,
+    rgba(56, 189, 248, 0.09) 55%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  animation: cardBeam 6s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes cardBeam {
+  0%   { left: -70%; opacity: 0; }
+  15%  { opacity: 1; }
+  60%  { left: 110%; opacity: 1; }
+  75%  { left: 120%; opacity: 0; }
+  100% { left: 130%; opacity: 0; }
+}
+
+/* Floating holographic dots */
+.card-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+  animation: cardDotFloat 5s ease-in-out infinite;
+  opacity: 0;
+}
+
+.cd-1 { top: 18%;  left: 12%;  animation-delay: 0s; }
+.cd-2 { top: 45%;  right: 16%; animation-delay: 0.7s; }
+.cd-3 { bottom: 24%; left: 20%; animation-delay: 1.4s; }
+.cd-4 { top: 30%;  right: 30%; animation-delay: 2.1s; }
+.cd-5 { bottom: 40%; right: 8%;  animation-delay: 2.8s; }
+.cd-6 { top: 62%;  left: 8%;   animation-delay: 3.5s; }
+
+@keyframes cardDotFloat {
+  0%, 100% { transform: translateY(0); opacity: 0; }
+  20%      { opacity: 0.9; }
+  50%      { transform: translateY(-22px); opacity: 0.9; }
+  80%      { opacity: 0; }
+}
+
+/* Ensure card content floats above the sliding background */
+.project-icon,
+.project-tag,
+.project-card h3,
+.project-card p,
+.project-card a,
+.no-link {
+  position: relative;
+  z-index: 1;
+}
+
 .project-icon {
   position: relative;
   display: flex;

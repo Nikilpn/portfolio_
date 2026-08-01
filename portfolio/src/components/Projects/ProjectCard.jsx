@@ -108,6 +108,19 @@ function ProjectCard({ project }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      <div className="card-bg">
+        <div className="card-grid" />
+
+        <div className="card-lightbeam" />
+
+        <span className="card-dot cd-1" />
+        <span className="card-dot cd-2" />
+        <span className="card-dot cd-3" />
+        <span className="card-dot cd-4" />
+        <span className="card-dot cd-5" />
+        <span className="card-dot cd-6" />
+      </div>
+
       <div className="project-icon">
         <Icon />
       </div>

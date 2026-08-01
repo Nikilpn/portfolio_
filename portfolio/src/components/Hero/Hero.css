@@ -274,11 +274,11 @@
   }
 
   .hero-content h1 {
-    font-size: 42px;
+    font-size: 44px;
   }
 
   .hero-content h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .hero-content p {
@@ -288,16 +288,79 @@
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .hero-buttons button {
-    width: 220px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-voice-btn {
+    justify-content: center;
   }
 
   .hero-video-wrap {
     flex: none;
     max-width: 100%;
     width: 100%;
+  }
+
+  .video-glow {
+    inset: -20px;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .hero {
+    padding: 100px 5% 70px;
+    gap: 40px;
+  }
+
+  .hero-content h1 {
+    font-size: 34px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .hero-content h2 {
+    font-size: 21px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero-buttons {
+    gap: 14px;
+  }
+
+  .hero-buttons button {
+    max-width: 260px;
+    padding: 13px 20px;
+    font-size: 15px;
+  }
+
+  .hero-video-wrap {
+    width: 100%;
+  }
+
+  .video-glow {
+    inset: -12px;
+    filter: blur(25px);
+  }
+
+  .video-frame-lines::before,
+  .video-frame-lines::after {
+    width: 18px;
+    height: 18px;
+  }
+
+  .video-scanline {
+    height: 40px;
   }
 
 }
