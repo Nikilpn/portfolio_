@@ -69,6 +69,40 @@ const projectIcons = {
   "Bigmart E-Commerce": FaShoppingBag
 };
 
+const themes = {
+  "WhatsApp Automation": { c1: "#25D366", c2: "#075E54", symbols: ["💬", "🟢", "⏰"] },
+  "Instagram Automation": { c1: "#E1306C", c2: "#833AB4", symbols: ["♥", "📸", "✉"] },
+  "Web Scraping Projects": { c1: "#22D3EE", c2: "#0EA5E9", symbols: ["🕸", "📊", "🐛"] },
+  "Background Removal Task": { c1: "#2DD4BF", c2: "#0F766E", symbols: ["🖼", "✂️", "✨"] },
+  "Portfolio Websites": { c1: "#61DAFB", c2: "#2563EB", symbols: ["⚛️", "🖥", "✦"] },
+  "BCA Project - Hotel Booking Website": { c1: "#F59E0B", c2: "#B45309", symbols: ["🎓", "📚", "🏨"] },
+  "React Learning Projects": { c1: "#61DAFB", c2: "#8B5CF6", symbols: ["⚛️", "💡", "🧩"] },
+  "Resume Builder": { c1: "#A78BFA", c2: "#7C3AED", symbols: ["📄", "✏️", "🖨"] },
+  "FastAPI Task Manager API": { c1: "#2DD4BF", c2: "#0891B2", symbols: ["🚀", "⚡", "📋"] },
+  "FastAPI JWT Authentication": { c1: "#818CF8", c2: "#4F46E5", symbols: ["🔐", "🗝", "🛡"] },
+  "FastAPI Media Sharing Application": { c1: "#C084FC", c2: "#9333EA", symbols: ["🎞", "🖼", "📤"] },
+  "FCM Push Notification Service": { c1: "#60A5FA", c2: "#2563EB", symbols: ["🔔", "📣", "💬"] },
+  "E-Commerce REST API": { c1: "#FB923C", c2: "#EA580C", symbols: ["🛒", "💳", "📦"] },
+  "Dairy Management REST API": { c1: "#4ADE80", c2: "#16A34A", symbols: ["🥛", "🐄", "🧀"] },
+  "Razorpay Payment Integration": { c1: "#38BDF8", c2: "#1D4ED8", symbols: ["💳", "💰", "🪙"] },
+  "Hotel Room Booking Platform": { c1: "#38BDF8", c2: "#0284C7", symbols: ["🏨", "🛎", "🗝"] },
+  "Blog Platform REST API": { c1: "#94A3B8", c2: "#475569", symbols: ["✍️", "📝", "💭"] },
+  "Income & Expenses REST API": { c1: "#34D399", c2: "#059669", symbols: ["💰", "📈", "🧾"] },
+  "Machine Learning Projects": { c1: "#F472B6", c2: "#DB2777", symbols: ["🧠", "🤖", "📐"] },
+  "NLP Twitter Sentiment Analysis": { c1: "#60A5FA", c2: "#1D4ED8", symbols: ["🐦", "💬", "📊"] },
+  "Diabetes Prediction": { c1: "#F87171", c2: "#DC2626", symbols: ["❤️", "🩺", "📉"] },
+  "DRF Movie CRUD API": { c1: "#FBBF24", c2: "#B45309", symbols: ["🎬", "🍿", "🎞"] },
+  "DRF Register & Login (JWT)": { c1: "#C084FC", c2: "#7E22CE", symbols: ["👤", "🔑", "🛡"] },
+  "Django Employee & Student CRUD": { c1: "#22D3EE", c2: "#0E7490", symbols: ["👥", "🗂", "✅"] },
+  "Simple Student CRUD": { c1: "#60A5FA", c2: "#1E40AF", symbols: ["🎒", "📝", "👨‍🎓"] },
+  "JavaScript Learning": { c1: "#F7DF1E", c2: "#D97706", symbols: ["✨", "🧮", "⚡"] },
+  "Python 12 Projects": { c1: "#4584B6", c2: "#306998", symbols: ["🐍", "🎯", "🧪"] },
+  "Snake Game": { c1: "#4ADE80", c2: "#15803D", symbols: ["🐍", "🎮", "🍎"] },
+  "OpenAI Chatbot": { c1: "#5EEAD4", c2: "#0D9488", symbols: ["🤖", "💬", "✨"] },
+  "E-Commerce Platform - Shopingfest": { c1: "#F472B6", c2: "#DB2777", symbols: ["🛍", "🛒", "🎀"] },
+  "Bigmart E-Commerce": { c1: "#FB923C", c2: "#C2410C", symbols: ["🛒", "📦", "🏷"] }
+};
+
 function ProjectCard({ project }) {
   const cardRef = useRef(null);
 
@@ -100,11 +134,20 @@ function ProjectCard({ project }) {
   };
 
   const Icon = projectIcons[project.title] || FaDatabase;
+  const theme = themes[project.title] || {
+    c1: "#38bdf8",
+    c2: "#6366f1",
+    symbols: ["⚙️", "✨", "💠"]
+  };
 
   return (
     <div
       ref={cardRef}
       className="project-card tilt-card"
+      style={{
+        "--tc1": theme.c1,
+        "--tc2": theme.c2
+      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -113,12 +156,23 @@ function ProjectCard({ project }) {
 
         <div className="card-lightbeam" />
 
+        <div className="card-orb" />
+
         <span className="card-dot cd-1" />
         <span className="card-dot cd-2" />
         <span className="card-dot cd-3" />
         <span className="card-dot cd-4" />
         <span className="card-dot cd-5" />
         <span className="card-dot cd-6" />
+
+        {theme.symbols.map((symbol, index) => (
+          <span
+            className={`card-symbol cs-${index + 1}`}
+            key={index}
+          >
+            {symbol}
+          </span>
+        ))}
       </div>
 
       <div className="project-icon">

@@ -120,6 +120,12 @@
   pointer-events: none;
   z-index: 0;
   border-radius: 14px;
+  background: radial-gradient(
+    ellipse at 50% -20%,
+    var(--tc1, #38bdf8) 0%,
+    transparent 60%
+  );
+  opacity: 0.12;
 }
 
 /* Sliding perspective grid */
@@ -130,13 +136,13 @@
   top: -10%;
   bottom: -10%;
   background-image:
-    linear-gradient(rgba(56, 189, 248, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.14) 1px, transparent 1px);
+    linear-gradient(var(--tc1, #38bdf8) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tc1, #38bdf8) 1px, transparent 1px);
   background-size: 34px 34px;
   transform: perspective(400px) rotateX(55deg);
   transform-origin: center bottom;
   animation: cardGridSlide 9s linear infinite;
-  opacity: 0.35;
+  opacity: 0.3;
   mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9), transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9), transparent 75%);
 }
@@ -155,9 +161,9 @@
   background: linear-gradient(
     105deg,
     transparent 0%,
-    rgba(56, 189, 248, 0.09) 45%,
-    rgba(99, 102, 241, 0.14) 50%,
-    rgba(56, 189, 248, 0.09) 55%,
+    var(--tc1, #38bdf8) 45%,
+    var(--tc2, #6366f1) 50%,
+    var(--tc1, #38bdf8) 55%,
     transparent 100%
   );
   transform: skewX(-18deg);
@@ -173,14 +179,38 @@
   100% { left: 130%; opacity: 0; }
 }
 
+/* Theme-colored orb */
+.card-orb {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  right: -50px;
+  bottom: -50px;
+  background: radial-gradient(
+    circle,
+    var(--tc1, #38bdf8) 0%,
+    var(--tc2, #6366f1) 40%,
+    transparent 70%
+  );
+  filter: blur(45px);
+  opacity: 0.35;
+  animation: cardOrbPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes cardOrbPulse {
+  from { opacity: 0.2; transform: scale(0.9); }
+  to   { opacity: 0.45; transform: scale(1.15); }
+}
+
 /* Floating holographic dots */
 .card-dot {
   position: absolute;
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+  background: var(--tc1, #38bdf8);
+  box-shadow: 0 0 10px var(--tc1, #38bdf8);
   animation: cardDotFloat 5s ease-in-out infinite;
   opacity: 0;
 }
@@ -197,6 +227,25 @@
   20%      { opacity: 0.9; }
   50%      { transform: translateY(-22px); opacity: 0.9; }
   80%      { opacity: 0; }
+}
+
+/* Themed floating symbols */
+.card-symbol {
+  position: absolute;
+  font-size: 26px;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 8px var(--tc1, #38bdf8));
+  animation: symbolFloat 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+.cs-1 { top: 12%;  left: 8%;   animation-delay: 0s; }
+.cs-2 { top: 48%;  right: 10%; animation-delay: 1.2s; }
+.cs-3 { bottom: 15%; left: 14%; animation-delay: 2.4s; }
+
+@keyframes symbolFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50%      { transform: translateY(-16px) rotate(15deg) scale(1.12); }
 }
 
 /* Ensure card content floats above the sliding background */
@@ -219,25 +268,26 @@
   height: 60px;
   margin-bottom: 22px;
   border-radius: 14px;
-  background: rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
+  background: rgba(30, 41, 59, 0.9);
+  color: var(--tc1, #38bdf8);
   font-size: 28px;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  border: 1px solid var(--tc1, #38bdf8);
+  box-shadow: 0 0 14px var(--tc1, #38bdf8);
   transform: translateZ(30px);
   transition: 0.3s;
 }
 
 .project-card:hover .project-icon {
-  background: #38bdf8;
+  background: var(--tc1, #38bdf8);
   color: #0f172a;
   transform: translateZ(45px) scale(1.08);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 25px var(--tc1, #38bdf8);
 }
 
 .project-tag {
   display: inline-block;
-  background-color: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
+  background-color: var(--tc1, #38bdf8);
+  color: #0f172a;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 13px;
@@ -248,7 +298,7 @@
 }
 
 .project-card h3 {
-  color: #38bdf8;
+  color: var(--tc1, #38bdf8);
   margin-bottom: 20px;
   font-size: 24px;
   transform: translateZ(20px);
@@ -263,7 +313,7 @@
 
 .project-card a {
   text-decoration: none;
-  color: #38bdf8;
+  color: var(--tc1, #38bdf8);
   font-weight: bold;
   transform: translateZ(25px);
   display: inline-block;
