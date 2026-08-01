@@ -1,10 +1,73 @@
 import "./Hero.css";
 
+import {
+  FaPython,
+  FaReact,
+  FaJs,
+  FaDatabase
+} from "react-icons/fa";
+
+import { SiDjango, SiFastapi, SiPostgresql } from "react-icons/si";
+
 function Hero() {
+
+  const floatingIcons = [
+    { Icon: FaPython, className: "fi fi-1" },
+    { Icon: SiDjango, className: "fi fi-2" },
+    { Icon: FaReact, className: "fi fi-3" },
+    { Icon: SiFastapi, className: "fi fi-4" },
+    { Icon: FaJs, className: "fi fi-5" },
+    { Icon: SiPostgresql, className: "fi fi-6" },
+    { Icon: FaDatabase, className: "fi fi-7" }
+  ];
 
   return (
 
     <section id="home" className="hero">
+
+      <div className="hero-bg">
+
+        <div className="starfield" />
+
+        <div className="orb orb-1" />
+
+        <div className="orb orb-2" />
+
+        <div className="orb orb-3" />
+
+        <div className="grid-floor" />
+
+        <div className="shape shape-cube">
+
+          <span className="cube-face cube-front" />
+
+          <span className="cube-face cube-back" />
+
+          <span className="cube-face cube-left" />
+
+          <span className="cube-face cube-right" />
+
+          <span className="cube-face cube-top" />
+
+          <span className="cube-face cube-bottom" />
+
+        </div>
+
+        <div className="shape shape-pyramid">
+
+          <span className="pyramid-face" />
+
+        </div>
+
+        <div className="shape shape-ring" />
+
+        {floatingIcons.map(({ Icon, className }, index) => (
+          <div className={className} key={index}>
+            <Icon />
+          </div>
+        ))}
+
+      </div>
 
       <div className="hero-content">
 

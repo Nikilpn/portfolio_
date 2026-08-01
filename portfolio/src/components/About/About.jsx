@@ -24,6 +24,17 @@ function About() {
           I also have knowledge in Machine Learning, API development, backend
           optimization, and building responsive user-focused applications.
         </p>
+
+        <p>
+          Beyond web development, I have hands-on experience in Web Scraping —
+          extracting large volumes of data from various companies and websites
+          for analysis and business use. I have also built automation solutions
+          using Selenium, Playwright, and Python, including WhatsApp automation
+          that sends messages to users automatically every day at a scheduled
+          time (with an anti-detection algorithm to avoid being flagged by
+          machines) and Instagram automation that automatically sends
+          connection requests and messages to clients.
+        </p>
       </div>
     </section>
   );
