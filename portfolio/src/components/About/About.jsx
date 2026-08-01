@@ -3,6 +3,17 @@ import "./About.css";
 function About() {
   return (
     <section id="about" className="about">
+
+      <div className="about-simple-bg">
+        <span className="sb-orb sb-orb-1" />
+        <span className="sb-orb sb-orb-2" />
+        <span className="sb-orb sb-orb-3" />
+        <span className="sb-dot sb-dot-1" />
+        <span className="sb-dot sb-dot-2" />
+        <span className="sb-dot sb-dot-3" />
+        <span className="sb-dot sb-dot-4" />
+      </div>
+
       <div className="section-title">
         <h2>About Me</h2>
       </div>

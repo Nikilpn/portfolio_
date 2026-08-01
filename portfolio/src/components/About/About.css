@@ -2,9 +2,85 @@
   padding: 120px 10%;
   background-color: #111827;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- Simple animated background ---------- */
+
+.about-simple-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Soft floating glow orbs */
+.sb-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: sbFloat 10s ease-in-out infinite alternate;
+}
+
+.sb-orb-1 {
+  width: 320px;
+  height: 320px;
+  top: -80px;
+  right: 10%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.4), transparent 70%);
+}
+
+.sb-orb-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  left: 8%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.35), transparent 70%);
+  animation-delay: 3s;
+}
+
+.sb-orb-3 {
+  width: 200px;
+  height: 200px;
+  top: 45%;
+  right: -60px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.3), transparent 70%);
+  animation-delay: 6s;
+}
+
+@keyframes sbFloat {
+  from { transform: translateY(0) scale(1); }
+  to   { transform: translateY(30px) scale(1.1); }
+}
+
+/* Gentle drifting dots */
+.sb-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+  opacity: 0.5;
+  animation: sbDotDrift 8s ease-in-out infinite;
+}
+
+.sb-dot-1 { top: 20%;  left: 15%; }
+.sb-dot-2 { top: 65%;  right: 20%; animation-delay: 2s; }
+.sb-dot-3 { bottom: 25%; left: 30%; animation-delay: 4s; }
+.sb-dot-4 { top: 40%;  right: 8%;  animation-delay: 6s; }
+
+@keyframes sbDotDrift {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50%      { transform: translateY(-18px); opacity: 0.8; }
 }
 
 .section-title {
+  position: relative;
+  z-index: 1;
   text-align: center;
   margin-bottom: 60px;
 }
@@ -15,6 +91,8 @@
 }
 
 .about-content {
+  position: relative;
+  z-index: 1;
   max-width: 900px;
   margin: auto;
 }
