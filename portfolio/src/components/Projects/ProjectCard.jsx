@@ -122,10 +122,6 @@ function ProjectCard({ project }) {
   const cardContent = (
     <>
       <div className="card-bg">
-        <div className="card-grid" />
-
-        <div className="card-lightbeam" />
-
         <div className="card-orb" />
 
         <span className="card-dot cd-1" />

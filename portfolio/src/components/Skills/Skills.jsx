@@ -63,8 +63,6 @@ function Skills() {
               }}
             >
               <div className="skill-icon-wrap">
-                <div className="skill-orbit orbit-1" />
-                <div className="skill-orbit orbit-2" />
                 <div className="skill-icon">
                   <Icon />
                 </div>

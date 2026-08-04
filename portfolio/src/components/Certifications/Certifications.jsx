@@ -77,6 +77,10 @@ function Certifications() {
 
   const [selected, setSelected] = useState(null);
 
+  const sortedCertificates = [...certificates].sort(
+    (a, b) => Number(b.year) - Number(a.year)
+  );
+
   const openViewer = (cert) => {
     setSelected(cert);
   };
@@ -110,7 +114,7 @@ function Certifications() {
 
       <div className="cert-grid">
 
-        {certificates.map((cert, index) => (
+        {sortedCertificates.map((cert, index) => (
 
           <div
             className="cert-card"

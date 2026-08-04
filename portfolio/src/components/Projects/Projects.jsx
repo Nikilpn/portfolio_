@@ -2,43 +2,6 @@ import "./Projects.css";
 
 import ProjectCard from "./ProjectCard";
 
-import {
-  FaPython,
-  FaReact,
-  FaJs,
-  FaDatabase,
-  FaRobot,
-  FaBrain,
-  FaCode
-} from "react-icons/fa";
-
-import {
-  SiDjango,
-  SiFastapi,
-  SiPostgresql,
-  SiMysql,
-  SiRedux,
-  SiFlask,
-  SiSelenium
-} from "react-icons/si";
-
-const floatingTechIcons = [
-  { Icon: FaPython, className: "pfi pfi-1" },
-  { Icon: SiDjango, className: "pfi pfi-2" },
-  { Icon: FaReact, className: "pfi pfi-3" },
-  { Icon: SiFastapi, className: "pfi pfi-4" },
-  { Icon: FaJs, className: "pfi pfi-5" },
-  { Icon: SiPostgresql, className: "pfi pfi-6" },
-  { Icon: FaDatabase, className: "pfi pfi-7" },
-  { Icon: FaRobot, className: "pfi pfi-8" },
-  { Icon: FaBrain, className: "pfi pfi-9" },
-  { Icon: SiMysql, className: "pfi pfi-10" },
-  { Icon: FaCode, className: "pfi pfi-11" },
-  { Icon: SiRedux, className: "pfi pfi-12" },
-  { Icon: SiFlask, className: "pfi pfi-13" },
-  { Icon: SiSelenium, className: "pfi pfi-14" }
-];
-
 function Projects() {
 
   const projects = [
@@ -263,16 +226,6 @@ function Projects() {
 
   return (
     <section id="projects" className="projects">
-
-      <div className="projects-bg">
-
-        {floatingTechIcons.map(({ Icon, className }, index) => (
-          <div className={className} key={index}>
-            <Icon />
-          </div>
-        ))}
-
-      </div>
 
       <div className="section-title">
         <h2>Projects</h2>
