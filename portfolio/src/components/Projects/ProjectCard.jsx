@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 import {
   FaWhatsapp,
   FaInstagram,
@@ -104,35 +102,6 @@ const themes = {
 };
 
 function ProjectCard({ project }) {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -12;
-    const rotateY = ((x - centerX) / centerX) * 12;
-
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-
-    card.style.setProperty("--mx", `${((x / rect.width) * 100).toFixed(2)}%`);
-    card.style.setProperty("--my", `${((y / rect.height) * 100).toFixed(2)}%`);
-  };
-
-  const handleMouseLeave = () => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
-  };
-
   const Icon = projectIcons[project.title] || FaDatabase;
   const theme = themes[project.title] || {
     c1: "#38bdf8",
@@ -146,11 +115,8 @@ function ProjectCard({ project }) {
   };
 
   const cardProps = {
-    ref: cardRef,
-    className: "project-card tilt-card",
-    style: cardStyle,
-    onMouseMove: handleMouseMove,
-    onMouseLeave: handleMouseLeave
+    className: "project-card",
+    style: cardStyle
   };
 
   const cardContent = (
@@ -198,8 +164,6 @@ function ProjectCard({ project }) {
           Company Project - No Public Link
         </span>
       )}
-
-      <div className="card-glare" />
     </>
   );
 
