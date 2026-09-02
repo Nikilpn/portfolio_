@@ -10,7 +10,7 @@ function Education() {
 
         <p>Indira Gandhi National Open University (IGNOU)</p>
 
-        <span>July 2023 - July 2026 (Pursuing)</span>
+        <span>July 2023 - July 2026 </span>
       </div>
 
       <div className="education-card">
