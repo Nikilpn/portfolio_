@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -6,6 +6,7 @@ import "./Navbar.css";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const links = [
     { href: "#home", label: "Home" },
@@ -18,6 +19,27 @@ function Navbar() {
     { href: "#contact", label: "Contact" }
   ];
 
+  useEffect(() => {
+    const sections = links
+      .map((link) => document.getElementById(link.href.slice(1)))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header className="navbar">
       <div className="nav-logo">
@@ -28,7 +50,12 @@ function Navbar() {
         <ul className="nav-links">
           {links.map((link, index) => (
             <li key={index}>
-              <a href={link.href}>{link.label}</a>
+              <a
+                href={link.href}
+                className={activeSection === link.href.slice(1) ? "active" : ""}
+              >
+                {link.label}
+              </a>
             </li>
           ))}
         </ul>
@@ -49,6 +76,7 @@ function Navbar() {
               <li key={index}>
                 <a
                   href={link.href}
+                  className={activeSection === link.href.slice(1) ? "active" : ""}
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}

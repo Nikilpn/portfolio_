@@ -1,5 +1,7 @@
 import "./Projects.css";
 
+import { useState } from "react";
+
 import ProjectCard from "./ProjectCard";
 
 function Projects() {
@@ -32,6 +34,27 @@ function Projects() {
       companyProject: true,
       description:
         "Company project — automated background removal task. This is a confidential client/internal project, so no repository link is shared."
+    },
+    {
+      title: "Southora",
+      category: "Company Project",
+      companyProject: true,
+      description:
+        "Travel and tourism booking backend built with Django REST Framework — trip bookings (domestic/international), tour plans, vehicle listings and bookings, services, testimonials, popular places, and search APIs with Swagger documentation."
+    },
+    {
+      title: "TyreGuard",
+      category: "Company Project",
+      companyProject: true,
+      description:
+        "Comprehensive tyre management platform built with Django — customer and vehicle management, tyre catalog, subscription plans, service bookings, billing, payments, claims, live vehicle location tracking via WebSockets, Celery background tasks, PostGIS geo queries, and multi-language support."
+    },
+    {
+      title: "MSAnilKumar",
+      category: "Company Project",
+      companyProject: true,
+      description:
+        "FastAPI backend for a client's business website — JWT admin authentication, product/event categories with image galleries, order management with Razorpay payment integration, news & updates, contact form, and newsletter subscription, with SQLAlchemy and Alembic migrations."
     },
     {
       title: "Portfolio Websites",
@@ -132,10 +155,52 @@ function Projects() {
       github: "https://github.com/Nikilpn/income_expenses_api-python-restframework-django-"
     },
     {
-      title: "Machine Learning Projects",
+      title: "Heart Disease Prediction",
       category: "Machine Learning",
       description:
-        "Machine learning notebooks covering diabetes and heart disease prediction with KNN, iris classification, salary linear regression, and Naive Bayes, plus Flask web apps serving the models.",
+        "Heart disease prediction using KNN classification in a Jupyter notebook.",
+      github: "https://github.com/Nikilpn/machine_learning_projects"
+    },
+    {
+      title: "Iris Classification",
+      category: "Machine Learning",
+      description:
+        "Iris flower classification notebook with data exploration and modeling.",
+      github: "https://github.com/Nikilpn/machine_learning_projects"
+    },
+    {
+      title: "Naive Bayes Theorem",
+      category: "Machine Learning",
+      description:
+        "Naive Bayes classifier implementation and demonstration notebook.",
+      github: "https://github.com/Nikilpn/machine_learning_projects"
+    },
+    {
+      title: "Salary Linear Regression",
+      category: "Machine Learning",
+      description:
+        "Salary prediction using linear regression on a salary dataset.",
+      github: "https://github.com/Nikilpn/machine_learning_projects"
+    },
+    {
+      title: "Flask Iris Prediction App",
+      category: "Machine Learning",
+      description:
+        "Flask web app serving an iris classification model with a prediction form.",
+      github: "https://github.com/Nikilpn/machine_learning_projects"
+    },
+    {
+      title: "Django Iris Prediction App",
+      category: "Machine Learning",
+      description:
+        "Django web app that loads a pickled iris model and serves live predictions.",
+      github: "https://github.com/Nikilpn/machine_learning_projects"
+    },
+    {
+      title: "Diabetes KNN Notebook",
+      category: "Machine Learning",
+      description:
+        "Diabetes prediction with the KNN algorithm in a Jupyter notebook.",
       github: "https://github.com/Nikilpn/machine_learning_projects"
     },
     {
@@ -188,10 +253,80 @@ function Projects() {
       github: "https://github.com/Nikilpn/javascript_learning"
     },
     {
-      title: "Python 12 Projects",
+      title: "Advanced Calculator",
       category: "Python",
       description:
-        "Collection of 12 classic Python projects including snake game (pygame), tic-tac-toe, AI tic-tac-toe, hangman, higher-lower game, coffee machine, password generator, Caesar cipher, silent auction, and OOP practice.",
+        "Advanced calculator built in Python.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "AI Tic-Tac-Toe",
+      category: "Python",
+      description:
+        "Tic-tac-toe game with an AI opponent.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Coffee Machine",
+      category: "Python",
+      description:
+        "Coffee machine simulator with resources, coins, and drink preparation.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Guess the Number",
+      category: "Python",
+      description:
+        "Number guessing game with an ASCII art logo.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Hangman",
+      category: "Python",
+      description:
+        "Classic hangman word game with stages, word list, and flowchart.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Higher Lower Game",
+      category: "Python",
+      description:
+        "Higher-lower comparison guessing game.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Caesar Cipher",
+      category: "Python",
+      description:
+        "Caesar cipher encryption and decryption program.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "OOP Practice",
+      category: "Python",
+      description:
+        "Python OOP practice covering inheritance, polymorphism, and access specifiers.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Password Generator",
+      category: "Python",
+      description:
+        "Random password generator.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Silent Auction",
+      category: "Python",
+      description:
+        "Silent auction program where the highest bid wins.",
+      github: "https://github.com/Nikilpn/python_12_projects_sample"
+    },
+    {
+      title: "Simple Tic-Tac-Toe",
+      category: "Python",
+      description:
+        "Simple two-player tic-tac-toe game.",
       github: "https://github.com/Nikilpn/python_12_projects_sample"
     },
     {
@@ -224,20 +359,48 @@ function Projects() {
     }
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredProjects = projects.filter((project) => {
+    const query = searchTerm.toLowerCase();
+    return (
+      project.title.toLowerCase().includes(query) ||
+      project.category.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <section id="projects" className="projects">
 
       <div className="section-title">
         <h2>Projects</h2>
+        <span className="projects-count">{projects.length} Total Projects</span>
       </div>
 
-      <div className="projects-grid">
-
-        {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} />
-        ))}
-
+      <div className="projects-search">
+        <input
+          type="text"
+          className="projects-search-input"
+          placeholder="Search projects by name, category or technology..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
+
+      {filteredProjects.length > 0 ? (
+        <div className="projects-grid">
+
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
+          ))}
+
+        </div>
+      ) : (
+        <p className="projects-no-results">
+          No projects found matching "{searchTerm}"
+        </p>
+      )}
 
     </section>
   );

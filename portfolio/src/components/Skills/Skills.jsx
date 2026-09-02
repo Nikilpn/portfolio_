@@ -17,7 +17,9 @@ import {
   SiFastapi,
   SiPostgresql,
   SiMysql,
-  SiSelenium
+  SiSelenium,
+  SiNumpy,
+  SiPandas
 } from "react-icons/si";
 
 const skillsData = [
@@ -28,6 +30,8 @@ const skillsData = [
   { name: "React.js", icon: FaReact, color: "#61DAFB" },
   { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
   { name: "Machine Learning", icon: FaBrain, color: "#F472B6" },
+  { name: "NumPy", icon: SiNumpy, color: "#4DABCF" },
+  { name: "Pandas", icon: SiPandas, color: "#150458" },
   { name: "Web Scraping", icon: FaBug, color: "#22D3EE" },
   { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
   { name: "Playwright", icon: FaBug, color: "#2EAD33" },

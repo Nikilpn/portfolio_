@@ -28,10 +28,24 @@
   text-decoration: none;
   font-size: 16px;
   transition: 0.3s;
+  position: relative;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: #38bdf8;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: #38bdf8;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
 }
 
 .nav-hamburger {
@@ -96,7 +110,8 @@
   transition: 0.3s;
 }
 
-.nav-mobile-menu a:hover {
+.nav-mobile-menu a:hover,
+.nav-mobile-menu a.active {
   color: #38bdf8;
   padding-left: 18px;
   background: rgba(56, 189, 248, 0.06);
