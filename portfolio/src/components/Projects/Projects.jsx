@@ -57,6 +57,13 @@ function Projects() {
         "FastAPI backend for a client's business website — JWT admin authentication, product/event categories with image galleries, order management with Razorpay payment integration, news & updates, contact form, and newsletter subscription, with SQLAlchemy and Alembic migrations."
     },
     {
+      title: "Fullstack - Kalingapuram",
+      category: "Company Project",
+      companyProject: true,
+      description:
+        "Full-stack company project for the Kalingapuram jewellery business website. Backend built with Python (FastAPI, SQLAlchemy and Alembic migrations) — JWT admin authentication, product management with gold/silver/diamond/platinum/kids/men categories, daily gold rate listings, hero/banner content, contact-us APIs, and subscription support. Frontend built with React (Vite) — storefront category pages, product details, and an admin dashboard for managing products and hero sections."
+    },
+    {
       title: "Portfolio Websites",
       category: "React",
       description:

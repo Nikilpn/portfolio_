@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { FaTimes, FaExpand } from "react-icons/fa";
+import { FaTimes, FaExpand, FaDownload } from "react-icons/fa";
 
 import "./Certifications.css";
 
@@ -72,6 +72,12 @@ function Certifications() {
       issuer: "APJ Abdul Kalam Technological University",
       year: "2023",
       image: "/certificates/btech-transcript.jpeg"
+    },
+    {
+      title: "BCA Grade Card",
+      issuer: "Indira Gandhi National Open University (IGNOU)",
+      year: "2025",
+      image: "/certificates/ignou-gradecard.png"
     }
   ];
 
@@ -145,6 +151,17 @@ function Certifications() {
               Click to view
             </div>
 
+            <a
+              className="cert-card-download"
+              href={cert.image}
+              download={cert.image.split("/").pop()}
+              onClick={(e) => e.stopPropagation()}
+              aria-label={`Download ${cert.title}`}
+              title="Download certificate"
+            >
+              <FaDownload />
+            </a>
+
           </div>
 
         ))}
@@ -159,6 +176,17 @@ function Certifications() {
         >
 
           <div className="cert-modal-stage">
+
+            <a
+              className="cert-modal-download"
+              href={selected.image}
+              download={selected.image.split("/").pop()}
+              onClick={(e) => e.stopPropagation()}
+              aria-label={`Download ${selected.title}`}
+              title="Download certificate"
+            >
+              <FaDownload />
+            </a>
 
             <button
               className="cert-modal-close"
