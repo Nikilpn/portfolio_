@@ -77,7 +77,7 @@ function Certifications() {
       title: "BCA Grade Card",
       issuer: "Indira Gandhi National Open University (IGNOU)",
       year: "2025",
-      image: "/certificates/ignou-gradecard.png"
+      image: "/certificates/ignou_gradecardnew.png"
     }
   ];
 
