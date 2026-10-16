@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { FaTimes, FaExpand, FaDownload } from "react-icons/fa";
+import { FaTimes, FaExpand, FaFilePdf, FaFileImage } from "react-icons/fa";
+
+import {
+  isPdf,
+  downloadCertificatePdf,
+  downloadCertificateJpeg,
+} from "../../utils/certificateDownload";
 
 import "./Certifications.css";
 
@@ -30,6 +36,12 @@ function Certifications() {
       issuer: "NthIndex Software Solutions",
       year: "2025",
       image: "/certificates/nthindex-internship.jpeg"
+    },
+    {
+      title: "Full Stack Developer Internship",
+      issuer: "IMIT Park Ltd",
+      year: "2026",
+      image: "/certificates/imit-internship.jpeg"
     },
     {
       title: "Data Science with AI Workshop",
@@ -65,7 +77,15 @@ function Certifications() {
       title: "B.Tech Degree Certificate",
       issuer: "APJ Abdul Kalam Technological University",
       year: "2023",
-      image: "/certificates/btech-degree.jpeg"
+      image: "/certificates/btech-degree.pdf",
+      thumbnail: "/certificates/btech-degree-thumb.png"
+    },
+    {
+      title: "B.Tech Consolidated Statement of Grades",
+      issuer: "APJ Abdul Kalam Technological University",
+      year: "2023",
+      image: "/certificates/btech-consolidated-grades.pdf",
+      thumbnail: "/certificates/btech-consolidated-grades-thumb.png"
     },
     {
       title: "B.Tech Academic Transcript",
@@ -83,9 +103,13 @@ function Certifications() {
 
   const [selected, setSelected] = useState(null);
 
+  const [busy, setBusy] = useState(null);
+
   const sortedCertificates = [...certificates].sort(
     (a, b) => Number(b.year) - Number(a.year)
   );
+
+  const previewSrc = (cert) => cert.thumbnail || cert.image;
 
   const openViewer = (cert) => {
     setSelected(cert);
@@ -93,6 +117,23 @@ function Certifications() {
 
   const closeViewer = () => {
     setSelected(null);
+  };
+
+  const handleDownload = async (e, cert, kind) => {
+    e.stopPropagation();
+    if (busy) return;
+
+    setBusy(`${cert.title}-${kind}`);
+
+    try {
+      if (kind === "pdf") {
+        await downloadCertificatePdf(cert);
+      } else {
+        await downloadCertificateJpeg(cert);
+      }
+    } finally {
+      setBusy(null);
+    }
   };
 
   useEffect(() => {
@@ -131,7 +172,7 @@ function Certifications() {
           >
 
             <img
-              src={cert.image}
+              src={previewSrc(cert)}
               alt={cert.title}
               loading="lazy"
             />
@@ -144,6 +185,8 @@ function Certifications() {
 
               <span>{cert.year}</span>
 
+              {isPdf(cert) && <span className="cert-format">PDF</span>}
+
             </div>
 
             <div className="cert-view-hint">
@@ -151,16 +194,33 @@ function Certifications() {
               Click to view
             </div>
 
-            <a
-              className="cert-card-download"
-              href={cert.image}
-              download={cert.image.split("/").pop()}
-              onClick={(e) => e.stopPropagation()}
-              aria-label={`Download ${cert.title}`}
-              title="Download certificate"
-            >
-              <FaDownload />
-            </a>
+            <div className="cert-card-actions">
+
+              <button
+                type="button"
+                className="cert-action-btn"
+                onClick={(e) => handleDownload(e, cert, "image")}
+                disabled={busy !== null}
+                aria-label={`Download ${cert.title} as JPEG`}
+                title="Download as JPEG"
+              >
+                <FaFileImage />
+                JPEG
+              </button>
+
+              <button
+                type="button"
+                className="cert-action-btn"
+                onClick={(e) => handleDownload(e, cert, "pdf")}
+                disabled={busy !== null}
+                aria-label={`Download ${cert.title} as PDF`}
+                title="Download as PDF"
+              >
+                <FaFilePdf />
+                PDF
+              </button>
+
+            </div>
 
           </div>
 
@@ -177,16 +237,33 @@ function Certifications() {
 
           <div className="cert-modal-stage">
 
-            <a
-              className="cert-modal-download"
-              href={selected.image}
-              download={selected.image.split("/").pop()}
-              onClick={(e) => e.stopPropagation()}
-              aria-label={`Download ${selected.title}`}
-              title="Download certificate"
-            >
-              <FaDownload />
-            </a>
+            <div className="cert-modal-actions">
+
+              <button
+                type="button"
+                className="cert-modal-action-btn"
+                onClick={(e) => handleDownload(e, selected, "image")}
+                disabled={busy !== null}
+                aria-label={`Download ${selected.title} as JPEG`}
+                title="Download as JPEG"
+              >
+                <FaFileImage />
+                JPEG
+              </button>
+
+              <button
+                type="button"
+                className="cert-modal-action-btn"
+                onClick={(e) => handleDownload(e, selected, "pdf")}
+                disabled={busy !== null}
+                aria-label={`Download ${selected.title} as PDF`}
+                title="Download as PDF"
+              >
+                <FaFilePdf />
+                PDF
+              </button>
+
+            </div>
 
             <button
               className="cert-modal-close"
@@ -198,10 +275,18 @@ function Certifications() {
 
             <div className="cert-viewer">
 
-              <img
-                src={selected.image}
-                alt={selected.title}
-              />
+              {isPdf(selected) ? (
+                <iframe
+                  className="cert-viewer-pdf"
+                  src={selected.image}
+                  title={selected.title}
+                />
+              ) : (
+                <img
+                  src={selected.image}
+                  alt={selected.title}
+                />
+              )}
 
             </div>
 

@@ -51,29 +51,44 @@
   opacity: 1;
 }
 
-.cert-card-download {
+.cert-card-actions {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  background: rgba(15, 23, 42, 0.85);
-  color: #38bdf8;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3;
+}
+
+.cert-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
-  text-decoration: none;
+  gap: 6px;
+  min-width: 76px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(15, 23, 42, 0.85);
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+  cursor: pointer;
   transition: 0.3s;
 }
 
-.cert-card-download:hover {
+.cert-action-btn:hover:not(:disabled) {
   background: #38bdf8;
   color: #0f172a;
-  transform: scale(1.1);
+  transform: translateY(-2px);
+}
+
+.cert-action-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
 }
 
 .cert-card img {
@@ -115,6 +130,12 @@
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
+}
+
+.cert-info .cert-format {
+  margin-left: 8px;
+  background-color: rgba(248, 113, 113, 0.15);
+  color: #f87171;
 }
 
 /* ---------- Certificate Modal Viewer ---------- */
@@ -172,29 +193,42 @@
   transform: rotate(90deg);
 }
 
-.cert-modal-download {
+.cert-modal-actions {
   position: absolute;
   top: -14px;
   left: -14px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  background: #1e293b;
-  color: #38bdf8;
-  font-size: 16px;
-  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.cert-modal-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
-  text-decoration: none;
+  gap: 7px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 21px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: #1e293b;
+  color: #38bdf8;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+  cursor: pointer;
   transition: 0.3s;
 }
 
-.cert-modal-download:hover {
+.cert-modal-action-btn:hover:not(:disabled) {
   background: #38bdf8;
   color: #0f172a;
+}
+
+.cert-modal-action-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
 }
 
 .cert-viewer {
@@ -214,6 +248,14 @@
   display: block;
   max-height: 70vh;
   object-fit: contain;
+  background: #0f172a;
+}
+
+.cert-viewer-pdf {
+  width: 100%;
+  height: 70vh;
+  border: 0;
+  display: block;
   background: #0f172a;
 }
 
